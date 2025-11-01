@@ -9,9 +9,16 @@
 // *Kairo Server Entry Point
 import express from "express";
 import "dotenv/config";
+import oAuthRouter from "./Routes/oauth.route.js";
+import authRouter from "./Routes/auth.route.js";
 
 // *Create Express app
 const app = express();
+
+app.use("/api/SV/kairo/oAuth", oAuthRouter);
+app.use("/api/SV/kairo/auth", authRouter);
+
+
 
 // *Load environment variables
 const PORT = process.env.PORT || 3000;
