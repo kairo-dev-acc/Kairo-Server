@@ -9,7 +9,7 @@
 import User from "../../Models/user.model.js";
 import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
-// import GenerateAuthToken from "../../Lib/generateAuthToken.js";
+import GenerateAuthToken from "../../Lib/GenerateAuthToken.js";
 
 const registerController = async (req, res) => {
   // *Start mongoose session for transaction
@@ -83,7 +83,7 @@ const registerController = async (req, res) => {
     });
 
     //   *generate auth token
-    // const token = await GenerateAuthToken(newUser._id);
+    const token = await GenerateAuthToken(newUser._id);
 
     //   *Save new user and commit transaction
     await newUser.save({ session: Session });
@@ -93,6 +93,7 @@ const registerController = async (req, res) => {
       message: "User registered successfully",
       user: newUser,
       success: true,
+      token: token,
     });
 
     console.log(`😘 successful registration of user: ${email}`);
