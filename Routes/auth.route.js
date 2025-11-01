@@ -9,29 +9,30 @@
 // *External Imports
 import { Router } from "express";
 
+import LoginController from "../Controllers/auth/login.controller.js";
+import LogoutController from "../Controllers/auth/logout.controller.js";
+import registerController from "../Controllers/auth/register.controller.js";
+
 // *Auth Router
 const authRouter = Router();
 
 // *login endpoint
-authRouter.get("/login", (req, res) => {
-    res.send({message:"Login endpoint"});
-    // Handle user login
-    //! path: http://localhost:5000/api/SV/kairo/auth/login
-});
+authRouter.get("/login", LoginController); 
+// Handle user login
+//! path: http://localhost:5000/api/SV/kairo/auth/login
+
 
 // *logout endpoint
-authRouter.post("/logout", (req, res) => {
-    res.send({message:"Logout endpoint"});
-    // Handle user logout
-    //! path: http://localhost:5000/api/SV/kairo/auth/logout
-});
+authRouter.post("/logout",LogoutController); 
+// Handle user logout
+// //! path: http://localhost:5000/api/SV/kairo/auth/logout
+
 
 // *register endpoint
-authRouter.post("/register", (req, res) => {
-    res.send({message:"Register endpoint"});
-    // Handle user registration
-    //! path: http://localhost:5000/api/SV/kairo/auth/register
-}); 
+authRouter.post("/register", registerController); 
+// Handle user registration
+//! path: http://localhost:5000/api/SV/kairo/auth/register
+
 
 export default authRouter;
 
