@@ -10,3 +10,5 @@ const LogoutController = (req, res) => {
   res.send({ message: "Logout controller" });
   // Handle user registration logic here
 };
+
+export default LogoutController;
