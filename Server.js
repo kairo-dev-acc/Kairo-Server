@@ -16,6 +16,8 @@ import connectDB from "./Database/mongodb.js";
 // *Create Express app
 const app = express();
 
+app.use(express.json()); 
+
 app.use("/api/SV/kairo/oAuth", oAuthRouter);
 app.use("/api/SV/kairo/auth", authRouter);
 

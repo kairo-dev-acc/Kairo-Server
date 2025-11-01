@@ -13,7 +13,7 @@ import mongoose from "mongoose";
 
 const registerController = async (req, res) => {
   // *Start mongoose session for transaction
-  const Session = mongoose.startSession();
+  const Session = await mongoose.startSession();
   Session.startTransaction();
 
   try {
@@ -58,63 +58,54 @@ const registerController = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPhoneNumber = await bcrypt.hash(phoneNumber.toString(), salt);
 
-    // *Create new user if middleName is not provided
-    if (!middleName) {
-      // *Create profile avatar using Dicebear API
-      const profileAvatar = `https://api.dicebear.com/9.x/initials/svg?seed=${firstName}${lastName}`;
-
-      //   *Create new user
-      const newUser = new User({
-        firstName,
-        middleName,
-        lastName,
-        email,
-        profilePicture: profileAvatar,
-        phoneNumber: hashedPhoneNumber,
-      });
-
-      //   *generate auth token
-      const token = await GenerateAuthToken(newUser._id);
-
-      //   *Save new user and commit transaction
-      await newUser.save({ session: Session });
-      await Session.commitTransaction();
-      Session.endSession();
-      res.status(201).send({
-        message: "User registered successfully",
-        user: newUser,
-        success: true,
-      });
-    }
-
     // *Create new user if middleName is provided
-    if (middleName) {
-      const profileAvatar = `https://api.dicebear.com/9.x/initials/svg?seed=${firstName}${middleName}${lastName}`;
 
-      //   *Create new user
-      const newUser = new User({
-        firstName,
-        middleName,
-        lastName,
-        email,
-        profilePicture: profileAvatar,
-        phoneNumber: hashedPhoneNumber,
-      });
+    const avatarSeed = middleName
+      ? `${firstName}${middleName}${lastName}`
+      : `${firstName}${lastName}`;
 
-      //   *generate auth token
-      const token = await GenerateAuthToken(newUser._id);
+    const profileAvatar = `https://api.dicebear.com/9.x/initials/svg?seed=${avatarSeed}`;
 
-      //   *Save new user and commit transaction
-      await newUser.save({ session: Session });
-      await Session.commitTransaction();
-      Session.endSession();
-      res.status(201).send({
-        message: "User registered successfully",
-        user: newUser,
-        success: true,
-      });
-    }
-  } catch (error) {}
+    const newUser = new User({
+      firstName,
+      middleName: middleName || null,
+      lastName,
+      email,
+      profilePicture: profileAvatar,
+      phoneNumber: hashedPhoneNumber,
+      overAllRating: 0,
+      level: 1,
+      vetted: false,
+      idVerified: false,
+      numberVerified: true,
+      paymentVerified: false,
+      addressVerified: false,
+    });
+
+    //   *generate auth token
+    // const token = await GenerateAuthToken(newUser._id);
+
+    //   *Save new user and commit transaction
+    await newUser.save({ session: Session });
+    await Session.commitTransaction();
+    Session.endSession();
+    res.status(201).send({
+      message: "User registered successfully",
+      user: newUser,
+      success: true,
+    });
+
+    console.log(`😘 successful registration of user: ${email}`);
+  } catch (error) {
+    // *Abort transaction on error
+    await Session.abortTransaction();
+    Session.endSession();
+    console.error("Registration error:", error);
+    res
+      .status(500)
+      .send({ message: "Server error during registration", success: false });
+    console.error(`😒 Registration error: ${error}`);
+  }
 };
 
 export default registerController;
