@@ -13,39 +13,39 @@ import { Router } from "express";
 const oAuthRouter = Router();
 
 // *IOS OAuth Endpoints
-oAuthRouter.post("/ios", (req, res) => {
+oAuthRouter.get("/ios", (req, res) => {
   res.send({ message: "ios endpoint" });
   // Handle user oAuthRouter iOS signup
-  //! path: /api/kairo/SV/oAuthRouter/ios
+  //! path: http://localhost:5000/api/SV/kairo/oauth/ios
 });
 oAuthRouter.post("/ios/login", (req, res) => {
   res.send({ message: "ios endpoint 2" });
   // Handle user oAuthRouter iOS login
-  //! path: /api/kairo/SV/oAuthRouter/ios
+  //! path: http://localhost:5000/api/SV/kairo/oauth/ios/login
 });
 
 // *google OAuth Endpoints
 oAuthRouter.post("/google", (req, res) => {
   res.send({ message: "google endpoint" });
   // Handle user oAuthRouter Google signup
-  //! path: /api/kairo/SV/oAuthRouter/google
+  //! path: http://localhost:5000/api/SV/kairo/oauth/google
 });
 oAuthRouter.post("/google/login", (req, res) => {
   res.send({ message: "google endpoint 2" });
   // Handle user oAuthRouter Google login
-  //! path: /api/kairo/SV/oAuthRouter/google
+  //! path: http://localhost:5000/api/SV/kairo/oauth/google/login
 });
 
 // *Facebook OAuth Endpoints
-oAuthRouter.post("/facebook/", (req, res) => {
+oAuthRouter.get("/facebook/", (req, res) => {
   res.send({ message: "facebook endpoint" });
   // Handle user oAuthRouter Facebook signup
-  //! path: /api/kairo/SV/oAuthRouter/facebook
+  //! path: http://localhost:5000/api/SV/kairo/oauth/facebook
 });
-oAuthRouter.post("/facebook/login", (req, res) => {
+oAuthRouter.get("/facebook/login", (req, res) => {
   res.send({ message: "facebook endpoint 2" });
   // Handle user oAuthRouter Facebook login
-  //! path: /api/kairo/SV/oAuthRouter/facebook
+  //! path: http://localhost:5000/api/SV/kairo/oauth/facebook/login
 });
 
 export default oAuthRouter;

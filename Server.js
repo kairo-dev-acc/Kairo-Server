@@ -9,9 +9,17 @@
 // *Kairo Server Entry Point
 import express from "express";
 import "dotenv/config";
+import oAuthRouter from "./Routes/oauth.route.js";
+import authRouter from "./Routes/auth.route.js";
+import connectDB from "./Database/mongodb.js";
 
 // *Create Express app
 const app = express();
+
+app.use(express.json()); 
+
+app.use("/api/SV/kairo/oAuth", oAuthRouter);
+app.use("/api/SV/kairo/auth", authRouter);
 
 // *Load environment variables
 const PORT = process.env.PORT || 3000;
@@ -20,4 +28,5 @@ const HOST = process.env.HOST || "localhost";
 // *Start the server
 app.listen(PORT, async () => {
   console.log(`Kairo🍃 Server is running on port ${HOST}${PORT}`);
+  await connectDB();
 });
