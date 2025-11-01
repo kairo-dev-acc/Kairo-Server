@@ -10,3 +10,5 @@ const LoginController = (req, res) => {
   res.send({ message: "Login controller" });
   // Handle user registration logic here
 };
+
+export default LoginController;
