@@ -52,6 +52,22 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    numberVerified: {
+      type: Boolean,
+      default: false,
+    },
+    paymentVerified: {
+      type: Boolean,
+      default: false,
+    },
+    address: {
+      type: String,
+      required: false,
+    },
+    addressVerified: {
+      type: Boolean,
+      default: false,
+    },
     createdAt: {
       type: Date,
       default: Date.now,
