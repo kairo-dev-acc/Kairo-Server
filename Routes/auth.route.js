@@ -17,7 +17,7 @@ import registerController from "../Controllers/auth/register.controller.js";
 const authRouter = Router();
 
 // *login endpoint
-authRouter.get("/login", LoginController); 
+authRouter.post("/login", LoginController); 
 // Handle user login
 //! path: http://localhost:5000/api/SV/kairo/auth/login
 

@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
     phoneNumber: {
-      type: Number,
+      type: String,
       required: true,
       unique: true,
     },
@@ -67,6 +67,10 @@ const userSchema = new mongoose.Schema(
     addressVerified: {
       type: Boolean,
       default: false,
+    },
+    profilePicture: {
+      type: String,
+      required: false,
     },
     createdAt: {
       type: Date,
