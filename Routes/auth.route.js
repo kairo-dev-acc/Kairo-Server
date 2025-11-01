@@ -13,24 +13,24 @@ import { Router } from "express";
 const authRouter = Router();
 
 // *login endpoint
-authRouter.post("/login", (req, res) => {
-    res.send("Login endpoint");
+authRouter.get("/login", (req, res) => {
+    res.send({message:"Login endpoint"});
     // Handle user login
-    //! path: /api/kairo/SV/authRouter/login
+    //! path: http://localhost:5000/api/SV/kairo/auth/login
 });
 
 // *logout endpoint
 authRouter.post("/logout", (req, res) => {
-    res.send("Logout endpoint");
+    res.send({message:"Logout endpoint"});
     // Handle user logout
-    //! path: /api/kairo/SV/authRouter/logout
+    //! path: http://localhost:5000/api/SV/kairo/auth/logout
 });
 
 // *register endpoint
 authRouter.post("/register", (req, res) => {
-    res.send("Register endpoint");
+    res.send({message:"Register endpoint"});
     // Handle user registration
-    //! path: /api/kairo/SV/authRouter/register
+    //! path: http://localhost:5000/api/SV/kairo/auth/register
 }); 
 
 export default authRouter;
