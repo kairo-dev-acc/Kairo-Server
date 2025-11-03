@@ -18,12 +18,14 @@ const app = express();
 
 app.use(express.json()); 
 
-app.use("/api/SV/kairo/oAuth", oAuthRouter);
-app.use("/api/SV/kairo/auth", authRouter);
 
 // *Load environment variables
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
+const API = process.env.API || "/api/SV/kairo";
+
+app.use(`${API}/oAuth`, oAuthRouter);
+app.use(`${API}/auth`, authRouter);
 
 // *Start the server
 app.listen(PORT, async () => {
