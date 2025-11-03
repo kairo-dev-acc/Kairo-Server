@@ -24,6 +24,7 @@ const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
 const API = process.env.API || "/api/SV/kairo";
 
+// *API Router
 app.use(`${API}/oAuth`, oAuthRouter);
 app.use(`${API}/auth`, authRouter);
 
