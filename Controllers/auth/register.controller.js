@@ -11,19 +11,11 @@ import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 import GenerateAuthToken from "../../Lib/GenerateAuthToken.js";
 
-export const registerPhone = async (req,res) => {
-  
-};
-export const PhoneVerified = async (req,res) => {
-  
-};
+export const registerPhone = async (req, res) => {};
+export const PhoneVerified = async (req, res) => {};
 
-export const registerEmail = async (req,res) => {
-  
-};
-export const EmailVerified = async (req,res) => {
-  
-};
+export const registerEmail = async (req, res) => {};
+export const EmailVerified = async (req, res) => {};
 
 export const register = async (req, res) => {
   // *Start mongoose session for transaction
@@ -122,5 +114,3 @@ export const register = async (req, res) => {
     console.error(`😒 Registration error: ${error}`);
   }
 };
-
-

@@ -16,13 +16,12 @@ import connectDB from "./Database/mongodb.js";
 // *Create Express app
 const app = express();
 
-app.use(express.json()); 
-
+app.use(express.json());
 
 // *Load environment variables
-const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || "localhost";
-const API = process.env.API || "/api/SV/kairo";
+const PORT = process.env.PORT;
+const HOST = process.env.HOST;
+const API = process.env.API;
 
 // *API Router
 app.use(`${API}/oAuth`, oAuthRouter);
