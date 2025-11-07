@@ -28,7 +28,7 @@ const messagingServiceSid = process.env.messagingServiceSid;
 const accountSid = twilioAccountSid;
 const authToken = twilioAuthToken;
 // 
-const client = require('twilio')(accountSid, authToken);
+const client = twilio(accountSid, authToken);
 // -----------------------------------------------------------------------------
 // REGISTER PHONE
 // -----------------------------------------------------------------------------
@@ -40,6 +40,10 @@ export const registerPhone = async (req, res) => {
 
     if (!phoneNumber)
       return res.status(400).json({ message: "Phone number is required" });
+
+    if (phoneNumber.length < 8 || phoneNumber.length > 15) {
+      return res.status(400).json({ message: "Invalid phone number format" });
+    }
 
     const existingUser = await User.findOne({ phoneNumber });
 
@@ -69,13 +73,18 @@ export const registerPhone = async (req, res) => {
     });
 
     // Send OTP via Twilio
-  await client.messages
-  .create({
-      body: `Your Kairo OTP is: ${otp}`,
-      messagingServiceSid: messagingServiceSid,
-      to: phoneNumber
-  })
-  .then(message => console.log(message.sid));
+  try {
+  await client.messages.create({
+    body: `Your Kairo OTP is: ${otp}`,
+    messagingServiceSid,
+    to: phoneNumber
+  });
+} catch (twilioError) {
+  console.error("Twilio SMS error:", twilioError);
+  await session.abortTransaction();
+  session.endSession();
+  return res.status(500).json({ message: "Failed to send OTP via SMS" });
+}
 
     await newUser.save({ session });
     await session.commitTransaction();

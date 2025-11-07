@@ -10,7 +10,7 @@ import mongoose from 'mongoose';
 import 'dotenv/config';
 
 // *Load MongoDB connection URIs from environment variables
-const MONGODB_URI_one = process.env.MONGODB_URI_one; 
+const MONGODB_URI_one = process.env.DB_URI; 
 // const MONGODB_URI_two = 'mongodb://localhost:27017/mydatabase'; 
 
 // *Function to connect to MongoDB
