@@ -26,31 +26,38 @@ const authRouter = Router();
 authRouter.get("/login", Login);
 // Handle user login
 //! path: http://localhost:5000/api/SV/pro/host/kairo/auth/login
+//! path: https://kairo-server.onrender.com/api/SV/pro/host/kairo/auth/login
 
 // *logout endpoint
 authRouter.post("/logout", Logout);
 // Handle user logout
 // //! path: http://localhost:5000/api/SV/pro/host/kairo/auth/logout
+// //! path: https://kairo-server.onrender.com/api/SV/pro/host/kairo/auth/logout
 
 // *register endpoint
 authRouter.post("/registerPhone", registerPhone);
 // Handle user PhoneNumber registration
 //! path: http://localhost:5000/api/SV/pro/host/kairo/auth/registerPhone
+//! path: https://kairo-server.onrender.com/api/SV/pro/host/kairo/auth/registerPhone
 
 authRouter.put("/PhoneVerified", PhoneVerified);
 // Handle user PhoneNumber Verified
 //! path: http://localhost:5000/api/SV/pro/host/kairo/auth/PhoneidVerified
+//! path: https://kairo-server.onrender.com/api/SV/pro/host/kairo/auth/PhoneidVerified
 
 authRouter.put("/registerEmail", registerEmail);
 // Handle user Email registration
 //! path: http://localhost:5000/api/SV/pro/host/kairo/auth/registerEmail
+//! path: https://kairo-server.onrender.com/api/SV/pro/host/kairo/auth/registerEmail
 
 authRouter.put("/EmailVerified", EmailVerified);
 // Handle user Email Verified
 //! path: http://localhost:5000/api/SV/pro/host/kairo/auth/EmailVerified
+//! path: https://kairo-server.onrender.com/api/SV/pro/host/kairo/auth/EmailVerified
 
 authRouter.put("/register", register);
 // Handle user registration
 //! path: http://localhost:5000/api/SV/pro/host/kairo/auth/register
+//! path: https://kairo-server.onrender.com/api/SV/pro/host/kairo/auth/register
 
 export default authRouter;
