@@ -53,8 +53,9 @@ export const registerPhone = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const otp = generateOTP();
-    const hashedOtp = hashOTP(otp);
+    // const otp = generateOTP();
+    // const hashedOtp = hashOTP(otp);
+    const otp = 669944;
     const otpExpire = Date.now() + 10 * 60 * 1000; // 10 mins
 
     // Create new user with phone number and OTP
@@ -62,7 +63,7 @@ export const registerPhone = async (req, res) => {
       phoneNumber,
       numberVerified: false,
       emailVerified: false,
-      phoneOTP: hashedOtp,
+      phoneOTP: otp,
       phoneOTPExpire: otpExpire,
       level: 1,
       overAllRating: 0,
@@ -73,18 +74,18 @@ export const registerPhone = async (req, res) => {
     });
 
     // Send OTP via Twilio
-  try {
-  await client.messages.create({
-    body: `Your Kairo OTP is: ${otp}`,
-    messagingServiceSid,
-    to: phoneNumber
-  });
-} catch (twilioError) {
-  console.error("Twilio SMS error:", twilioError);
-  await session.abortTransaction();
-  session.endSession();
-  return res.status(500).json({ message: "Failed to send OTP via SMS" });
-}
+//   try {
+//   await client.messages.create({
+//     body: `Your Kairo OTP is: ${otp}`,
+//     messagingServiceSid,
+//     to: phoneNumber
+//   });
+// } catch (twilioError) {
+//   console.error("Twilio SMS error:", twilioError);
+//   await session.abortTransaction();
+//   session.endSession();
+//   return res.status(500).json({ message: "Failed to send OTP via SMS" });
+// }
 
     await newUser.save({ session });
     await session.commitTransaction();
